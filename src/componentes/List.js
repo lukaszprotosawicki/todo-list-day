@@ -4,12 +4,12 @@ import { DataContext } from "./DataProvider";
 
 const List = () => {
   const [todos, setTodos] = useContext(DataContext);
-  console.log(todos);
+
   return (
     <ul>
-      <ListItem />
-      <ListItem />
-      <ListItem />
+      {todos.map((todo, index) => (
+        <ListItem todo={todo} key={index} id={index} />
+      ))}
     </ul>
   );
 };

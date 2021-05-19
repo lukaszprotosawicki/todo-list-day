@@ -3,10 +3,7 @@ import React, { useState, useEffect, createContext } from "react";
 export const DataContext = createContext();
 
 const DataProvider = (props) => {
-  const [todos, setTodos] = useState([
-    { name: "cooking", complete: false },
-    { name: "playing", complete: true },
-  ]);
+  const [todos, setTodos] = useState([]);
   return (
     <DataContext.Provider value={[todos, setTodos]}>
       {props.children}
