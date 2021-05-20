@@ -5,6 +5,7 @@ const Footer = () => {
   const [checkAll, setCheckAll] = useState(false);
   const [todos, setTodos] = useContext(DataContext);
 
+  /// select all
   const handleCheckAll = () => {
     const newTodos = [...todos];
     newTodos.forEach((todo) => {
@@ -14,17 +15,38 @@ const Footer = () => {
     setCheckAll(!checkAll);
   };
 
+  ///// delete task
+  const deleteTodo = () => {
+    const newTodos = todos.filter((todo) => {
+      return todo.complete === false;
+    });
+    setTodos(newTodos);
+    setCheckAll(false);
+  };
+
   return (
-    <div className="row">
-      <label htmlFor="all">
-        <input type="checkbox" name="all" id="all" onClick={handleCheckAll} />
-        ALL
-      </label>
-      <p>You have 0 to do</p>
-      <button className="bt-font-size" id="delete">
-        Delete
-      </button>
-    </div>
+    <>
+      {todos.length === 0 ? (
+        <h2> Congratulations! Nothings To Do</h2>
+      ) : (
+        <div className="row">
+          <label htmlFor="all">
+            <input
+              type="checkbox"
+              name="all"
+              id="all"
+              onClick={handleCheckAll}
+              checked={checkAll}
+            />
+            ALL
+          </label>
+          <p>You have {todos.length} to do</p>
+          <button onClick={deleteTodo} className="bt-font-size" id="delete">
+            Delete
+          </button>
+        </div>
+      )}
+    </>
   );
 };
 
