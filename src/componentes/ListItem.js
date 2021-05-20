@@ -13,7 +13,9 @@ const ListItem = ({ todo, id, checkComplete }) => {
           />
           {todo.name}
         </label>
-        <button className="bt-font-size">Edit</button>
+        <button disabled={todo.complete} className="bt-font-size">
+          Edit
+        </button>
       </li>
     </ul>
   );

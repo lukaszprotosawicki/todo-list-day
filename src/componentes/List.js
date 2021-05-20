@@ -5,9 +5,15 @@ import { DataContext } from "./DataProvider";
 const List = () => {
   const [todos, setTodos] = useContext(DataContext);
 
-  /// take id
+  /// take id, add class active
   const switchComplete = (id) => {
-    alert(id);
+    const newTodos = [...todos];
+    newTodos.forEach((todo, index) => {
+      if (index === id) {
+        todo.complete = !todo.complete;
+      }
+    });
+    setTodos(newTodos);
   };
 
   return (
