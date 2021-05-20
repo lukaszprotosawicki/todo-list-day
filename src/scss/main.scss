@@ -7,7 +7,8 @@
 
 body {
   background-image: url(../img/bg-desktop-light.jpg);
-  background-size: 100%;
+  background-size: 100vw 140vh;
+  background-repeat: no-repeat;
 }
 
 .App {
@@ -20,6 +21,7 @@ body {
     min-height: 500px;
     box-shadow: 0 3px 8px #555;
     background-color: rgba(255, 255, 255, 0.85);
+
     h1 {
       text-align: center;
       letter-spacing: 0.3rem;

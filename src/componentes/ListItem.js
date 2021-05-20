@@ -1,11 +1,16 @@
 import React from "react";
 
-const ListItem = ({ todo, id }) => {
+const ListItem = ({ todo, id, checkComplete }) => {
   return (
     <ul>
       <li>
-        <label htmlFor={id}>
-          <input type="checkbox" id={id} />
+        <label htmlFor={id} className={todo.complete ? "active" : ""}>
+          <input
+            type="checkbox"
+            id={id}
+            checked={todo.complete}
+            onChange={() => checkComplete(id)}
+          />
           {todo.name}
         </label>
         <button className="bt-font-size">Edit</button>
