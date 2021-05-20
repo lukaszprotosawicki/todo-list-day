@@ -35,12 +35,15 @@ const Footer = () => {
               type="checkbox"
               name="all"
               id="all"
-              onClick={handleCheckAll}
+              onChange={handleCheckAll}
               checked={checkAll}
             />
             ALL
           </label>
-          <p>You have {todos.length} to do</p>
+          <p>
+            You have {todos.filter((todo) => todo.complete === false).length} to
+            do
+          </p>
           <button onClick={deleteTodo} className="bt-font-size" id="delete">
             Delete
           </button>
