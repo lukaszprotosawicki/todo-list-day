@@ -8,10 +8,12 @@ function App() {
   return (
     <DataProvider>
       <div className="App">
-        <h1>What's the Plan for Today</h1>
-        <Form />
-        <List />
-        <Footer />
+        <div className="container-bg">
+          <h1>What's the Plan for Today</h1>
+          <Form />
+          <List />
+          <Footer />
+        </div>
       </div>
     </DataProvider>
   );

@@ -8,7 +8,7 @@ const ListItem = ({ todo, id }) => {
           <input type="checkbox" id={id} />
           {todo.name}
         </label>
-        <button>Edit</button>
+        <button className="bt-font-size">Edit</button>
       </li>
     </ul>
   );

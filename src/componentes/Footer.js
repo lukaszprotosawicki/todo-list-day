@@ -8,7 +8,9 @@ const Footer = () => {
         ALL
       </label>
       <p>You have 0 to do</p>
-      <button id="delete">Delete</button>
+      <button className="bt-font-size" id="delete">
+        Delete
+      </button>
     </div>
   );
 };

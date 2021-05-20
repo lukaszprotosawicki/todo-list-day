@@ -12,7 +12,7 @@ const Form = () => {
     setTodoName(""); /// clear input
   };
   return (
-    <form autoComplete="off" onSubmit={addTodo}>
+    <form className="form-container" autoComplete="off" onSubmit={addTodo}>
       <input
         type="text"
         name="todos"
@@ -22,7 +22,9 @@ const Form = () => {
         value={todoName}
         onChange={(e) => setTodoName(e.target.value.toLowerCase())}
       />
-      <button type="submit">Create</button>
+      <button className="bt-font-size" type="submit">
+        Create
+      </button>
     </form>
   );
 };
