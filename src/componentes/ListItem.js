@@ -1,30 +1,37 @@
 import React, { useState } from "react";
 
-const ListItem = ({ todo, id, checkComplete }) => {
+const ListItem = ({ todo, id, checkComplete, handleEditTodos }) => {
   const [onEdit, setOnEdit] = useState(false);
+  const [editValue, setEditValue] = useState(todo.name);
 
   /// edit button onClick
   const handleOnEdit = () => {
     setOnEdit(true);
   };
+
+  ///save button onClick
+  const handleSave = (id) => {
+    setOnEdit(false);
+    if (editValue) {
+      handleEditTodos(editValue, id);
+    } else {
+      setEditValue(todo.name);
+    }
+  };
+
   if (onEdit) {
     return (
       <ul>
         <li>
           <input
             type="text"
-            id={id}
-            checked={todo.complete}
-            onChange={() => checkComplete(id)}
+            id={editValue}
+            value={editValue}
+            name="editValue"
+            onChange={(e) => setEditValue(e.target.value.toLowerCase())}
           />
-          {todo.name}
-
-          <button
-            disabled={todo.complete}
-            onClick={handleOnEdit}
-            className="bt-font-size"
-          >
-            Edit
+          <button onClick={() => handleSave(id)} className="bt-font-size">
+            Save
           </button>
         </li>
       </ul>
