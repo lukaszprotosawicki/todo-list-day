@@ -15,12 +15,13 @@ const Footer = () => {
     setCheckAll(!checkAll);
   };
 
+  const newTodosComplete = () => {
+    return todos.filter((todo) => todo.complete === false);
+  };
+
   ///// delete task
   const deleteTodo = () => {
-    const newTodos = todos.filter((todo) => {
-      return todo.complete === false;
-    });
-    setTodos(newTodos);
+    setTodos(newTodosComplete());
     setCheckAll(false);
   };
 
@@ -40,10 +41,7 @@ const Footer = () => {
             />
             ALL
           </label>
-          <p>
-            You have {todos.filter((todo) => todo.complete === false).length} to
-            do
-          </p>
+          <p>You have {newTodosComplete().length} to do</p>
           <button onClick={deleteTodo} className="bt-font-size" id="delete">
             Delete
           </button>
