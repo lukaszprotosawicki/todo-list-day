@@ -11,11 +11,13 @@ export default function ListItem({ todo, inprogress, id }) {
   function deleteTodo() {
     firebaseTodo.collection("todos").doc(id).delete();
   }
+
   return (
     <ul>
       <li>
         <div style={{ display: "flex" }}>
           <label>
+            sadas {console.log(!inprogress)}
             <input type="checkbox" />
             {todo.name}
           </label>

@@ -1,7 +1,6 @@
 import React from "react";
-// import { firebaseTodo } from "./FirebaseConfig";
 
-const Footer = ({ id, inprogress }) => {
+const Footer = ({ todo }) => {
   // const [checkAll, setCheckAll] = useState(false);
 
   // /// select all
@@ -14,11 +13,18 @@ const Footer = ({ id, inprogress }) => {
   //   setCheckAll(!checkAll);
   // };
 
+  // const ilosc = () => {
+  //   firebaseTodo.collection("todos").getSize();
+  //   console.log(todos.length);
+  // };
+
   // ///// delete task
   // const deleteTodo = () => {
   //   setTodos(newTodosComplete());
   //   setCheckAll(false);
   // };
+
+  /// select all
 
   return (
     <>
