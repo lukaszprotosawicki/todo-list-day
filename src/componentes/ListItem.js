@@ -1,31 +1,35 @@
 import React from "react";
+import { firebaseTodo } from "./FirebaseConfig";
 
-export default function ListItem(todo, inprogress, id) {
+export default function ListItem({ todo, inprogress, id }) {
+  function toggleInProgress() {
+    firebaseTodo.collection("todos").doc(id).update({
+      inprogress: !inprogress,
+    });
+  }
+
+  function deleteTodo() {
+    firebaseTodo.collection("todos").delete();
+  }
   return (
     <ul>
       <li>
-        <label htmlFor={id} className={todo.complete ? "active" : ""}>
-          <input
-            type="checkbox"
-            id={id}
-            checked={todo.complete}
-            // onChange={() => checkComplete(id)}
-          />
+        <label>
+          <input type="checkbox" />
           {todo.name}
         </label>
         <div>
-          {todo.todo}
-          <p>{inprogress ? "In Progress" : "Completed"}</p>
+          {todo}
+          <p className="in-progress">
+            {inprogress ? "In Progress" : "Completed"}
+          </p>
         </div>
 
-        <button
-          // disabled={todo.complete}
-          // onClick={handleOnEdit}
-          className="bt-font-size"
-        >
-          Edit
+        <button className="bt-font-size">Edit</button>
+        <button onClick={toggleInProgress}>
+          {inprogress ? "Done" : "UnDone"}
         </button>
-        <button>Done</button>
+        <button onClick={deleteTodo}>X</button>
       </li>
     </ul>
   );

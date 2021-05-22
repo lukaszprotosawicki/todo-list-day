@@ -10,18 +10,7 @@ function App() {
 
   useEffect(() => {
     getTodos();
-  });
-
-  // add / create daily task
-  const addTodo = (e) => {
-    e.preventDefault();
-    firebaseTodo.collection("todos").add({
-      inprogress: true,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      todo: todoInput,
-    });
-    setTodoInput("");
-  };
+  }, []);
 
   const getTodos = () => {
     firebaseTodo.collection("todos").onSnapshot(function (querySnapshot) {
@@ -34,6 +23,18 @@ function App() {
       );
     });
   };
+
+  // add / create daily task
+  const addTodo = (e) => {
+    e.preventDefault();
+    firebaseTodo.collection("todos").add({
+      inprogress: false,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      todo: todoInput,
+    });
+    setTodoInput("");
+  };
+
   return (
     <div className="App">
       <div className="container-bg">
