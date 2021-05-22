@@ -9,27 +9,34 @@ export default function ListItem({ todo, inprogress, id }) {
   }
 
   function deleteTodo() {
-    firebaseTodo.collection("todos").delete();
+    firebaseTodo.collection("todos").doc(id).delete();
   }
   return (
     <ul>
       <li>
-        <label>
-          <input type="checkbox" />
-          {todo.name}
-        </label>
-        <div>
-          {todo}
-          <p className="in-progress">
-            {inprogress ? "In Progress" : "Completed"}
-          </p>
+        <div style={{ display: "flex" }}>
+          <label>
+            <input type="checkbox" />
+            {todo.name}
+          </label>
+          <div style={{ display: "block" }}>
+            {todo}
+            <p className="in-progress">
+              {inprogress ? "In Progress" : "Completed"}
+            </p>
+          </div>
         </div>
-
-        <button className="bt-font-size">Edit</button>
-        <button onClick={toggleInProgress}>
-          {inprogress ? "Done" : "UnDone"}
-        </button>
-        <button onClick={deleteTodo}>X</button>
+        <div style={{ display: "flex" }}>
+          <div style={{ cursor: "pointer" }} className="bt-font-size">
+            ⚙️
+          </div>
+          <div style={{ cursor: "pointer" }} onClick={toggleInProgress}>
+            {inprogress ? "✔️" : "❌"}
+          </div>
+          <div style={{ cursor: "pointer" }} onClick={deleteTodo}>
+            🗑️
+          </div>
+        </div>
       </li>
     </ul>
   );

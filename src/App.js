@@ -62,6 +62,7 @@ function App() {
             id={todo.id}
           />
         ))}
+
         <Footer />
       </div>
     </div>

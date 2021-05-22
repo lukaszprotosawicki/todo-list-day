@@ -1,8 +1,8 @@
 import React from "react";
+// import { firebaseTodo } from "./FirebaseConfig";
 
-const Footer = () => {
+const Footer = ({ id, inprogress }) => {
   // const [checkAll, setCheckAll] = useState(false);
-  // const [todos, setTodos] = useContext(DataContext);
 
   // /// select all
   // const handleCheckAll = () => {
@@ -12,10 +12,6 @@ const Footer = () => {
   //   });
   //   setTodos(newTodos);
   //   setCheckAll(!checkAll);
-  // };
-
-  // const newTodosComplete = () => {
-  //   return todos.filter((todo) => todo.complete === false);
   // };
 
   // ///// delete task
@@ -31,7 +27,7 @@ const Footer = () => {
           <input type="checkbox" name="all" id="all" />
           ALL
         </label>
-        <p>You have to do</p>
+        <p>You have to do </p>
         <button className="bt-font-size" id="delete">
           Delete
         </button>
