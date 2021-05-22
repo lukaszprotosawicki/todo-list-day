@@ -1,42 +1,69 @@
-import React, { useState } from "react";
-import Footer from "./componentes/Footer.js";
-import Form from "./componentes/Form.js";
-import List from "./componentes/List.js";
-import DataProvider from "./componentes/DataProvider.js";
-import { ThemeProvider, createGlobalStyle } from "styled-components";
+import React, { useEffect, useState } from "react";
+import { firebaseTodo } from "./componentes/FirebaseConfig.js";
+import firebase from "firebase";
+import ListItem from "./componentes/ListItem";
+import Footer from "./componentes/Footer";
 
 function App() {
-  const GlobalStyle = createGlobalStyle`
-body {
-  background-color: ${(props) =>
-    props.theme.mode === "dark" ? "#111" : "#EEE"}
-  color: ${(props) => (props.theme.mode === "dark" ? "#EEE" : "#111")}
-}
-`;
-  const [theme, setTheme] = useState({ mode: "dark" });
+  const [todos, setTodos] = useState([]);
+  const [todoInput, setTodoInput] = useState("");
+
+  useEffect(() => {
+    getTodos();
+  });
+
+  // add / create daily task
+  const addTodo = (e) => {
+    e.preventDefault();
+    firebaseTodo.collection("todos").add({
+      inprogress: true,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      todo: todoInput,
+    });
+    setTodoInput("");
+  };
+
+  const getTodos = () => {
+    firebaseTodo.collection("todos").onSnapshot(function (querySnapshot) {
+      setTodos(
+        querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          todo: doc.data().todo,
+          inprogress: doc.data().inprogress,
+        }))
+      );
+    });
+  };
   return (
-    <DataProvider>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <div className="App">
-          <div className="container-bg">
-            <button
-              onClick={(e) =>
-                setTheme(
-                  theme.mode === "dark" ? { mode: "light" } : { mode: "dark" }
-                )
-              }
-            >
-              Light/Dark
-            </button>
-            <h1>What's the Plan for Today</h1>
-            <Form />
-            <List />
-            <Footer />
-          </div>
-        </div>
-      </ThemeProvider>
-    </DataProvider>
+    <div className="App">
+      <div className="container-bg">
+        <h1>What's the Plan for Today</h1>
+
+        <form action="">
+          <input
+            type="text"
+            name="todos"
+            id="todos"
+            required
+            placeholder="Create daily tasks.."
+            value={todoInput}
+            onChange={(e) => setTodoInput(e.target.value)}
+          />
+
+          <button onClick={addTodo} className="bt-font-size" type="submit">
+            Create
+          </button>
+        </form>
+        {todos.map((todo) => (
+          <ListItem
+            todo={todo.todo}
+            inprogress={todo.inprogress}
+            id={todo.id}
+          />
+        ))}
+        <Footer />
+      </div>
+    </div>
   );
 }
 

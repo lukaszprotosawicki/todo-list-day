@@ -1,65 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
 
-const ListItem = ({ todo, id, checkComplete, handleEditTodos }) => {
-  const [onEdit, setOnEdit] = useState(false);
-  const [editValue, setEditValue] = useState(todo.name);
-
-  /// edit button onClick
-  const handleOnEdit = () => {
-    setOnEdit(true);
-  };
-
-  ///save button onClick
-  const handleSave = (id) => {
-    setOnEdit(false);
-    if (editValue) {
-      handleEditTodos(editValue, id);
-    } else {
-      setEditValue(todo.name);
-    }
-  };
-
-  if (onEdit) {
-    return (
-      <ul>
-        <li>
+export default function ListItem(todo, inprogress, id) {
+  return (
+    <ul>
+      <li>
+        <label htmlFor={id} className={todo.complete ? "active" : ""}>
           <input
-            type="text"
-            id={editValue}
-            value={editValue}
-            name="editValue"
-            onChange={(e) => setEditValue(e.target.value.toLowerCase())}
+            type="checkbox"
+            id={id}
+            checked={todo.complete}
+            // onChange={() => checkComplete(id)}
           />
-          <button onClick={() => handleSave(id)} className="bt-font-size">
-            Save
-          </button>
-        </li>
-      </ul>
-    );
-  } else {
-    return (
-      <ul>
-        <li>
-          <label htmlFor={id} className={todo.complete ? "active" : ""}>
-            <input
-              type="checkbox"
-              id={id}
-              checked={todo.complete}
-              onChange={() => checkComplete(id)}
-            />
-            {todo.name}
-          </label>
-          <button
-            disabled={todo.complete}
-            onClick={handleOnEdit}
-            className="bt-font-size"
-          >
-            Edit
-          </button>
-        </li>
-      </ul>
-    );
-  }
-};
+          {todo.name}
+        </label>
+        <div>
+          {todo.todo}
+          <p>{inprogress ? "In Progress" : "Completed"}</p>
+        </div>
 
-export default ListItem;
+        <button
+          // disabled={todo.complete}
+          // onClick={handleOnEdit}
+          className="bt-font-size"
+        >
+          Edit
+        </button>
+        <button>Done</button>
+      </li>
+    </ul>
+  );
+}
